@@ -1,1 +1,3 @@
 # SkillUp
+
+practice python, sql
