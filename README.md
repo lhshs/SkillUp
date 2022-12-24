@@ -1,6 +1,6 @@
 # SkillUp
 
-practice python🤔
+## practice python🤔
 1. 기초 300제 : https://wikidocs.net/book/922
 2. 백준 : https://www.acmicpc.net/step
 
