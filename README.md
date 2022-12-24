@@ -1,3 +1,8 @@
 # SkillUp
 
-practice python, sql
+practice python🤔
+- 
+
+
+practice sql🤔
+
