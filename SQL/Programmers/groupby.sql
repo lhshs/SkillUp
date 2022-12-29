@@ -66,3 +66,14 @@ ORDER BY FOOD_TYPE DESC
 -- # SELECT FOOD_TYPE, MAX(FAVORITES) AS FAVORITES
 -- # FROM REST_INFO
 -- # GROUP BY FOOD_TYPE
+
+# 입양 시각 구하기 2
+SET @HOUR = -1;
+SELECT @HOUR := @HOUR+1 AS HOUR, (SELECT COUNT(*) 
+                                  FROM ANIMAL_OUTS 
+                                  WHERE HOUR(DATETIME) = @HOUR) AS COUNT
+FROM ANIMAL_OUTS
+WHERE @HOUR < 23
+GROUP BY 1
+ORDER BY 1
+-- 서브쿼리와 SET 함수 사용!
