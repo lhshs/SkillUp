@@ -52,7 +52,7 @@ FROM STATION
 WHERE LENGTH(CITY) = (SELECT MAX(LENGTH(CITY))
                       FROM STATION)
 ;
--- another solve --
+-- -- another solve -- --
 select city c, length(city) l
 from   station
 order by l desc, c asc
@@ -63,4 +63,54 @@ from   station
 order by l asc, c asc
 limit 1;
 
---
+-- Weather Observation Station 5
+SELECT DISTINCT(CITY)
+FROM STATION
+WHERE CITY LIKE ('A%')
+OR CITY LIKE ('E%')
+OR CITY LIKE ('I%')
+OR CITY LIKE ('O%')
+OR CITY LIKE ('U%')
+;
+
+-- --> another solve -- --
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY REGEXP '^[aeiou]'
+;
+
+
+-- Weather Observation Station 7
+SELECT DISTINCT(CITY)
+FROM STATION
+WHERE CITY REGEXP '[aeiou]$'
+;
+
+
+-- Weather Observation Station 8
+SELECT DISTINCT(CITY)
+FROM STATION
+WHERE CITY REGEXP '^[AEIOU]' AND CITY REGEXP '[AEIOU]$'
+
+
+-- Weather Observation Station 9
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY REGEXP '^[^AEIOU]'
+
+-- Weather Observation Station 10
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY REGEXP '[^AEIOU]$'
+
+
+-- Weather Observation Station 11
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY REGEXP '^[^AEIOU]' OR CITY REGEXP '[^AEIOU]$'
+
+
+-- Weather Observation Station 12
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY REGEXP '^[^AEIOU]' AND CITY REGEXP '[^AEIOU]$'
