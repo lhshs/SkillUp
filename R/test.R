@@ -10,15 +10,19 @@ R
 setwd('/Users/lhs/Desktop/GitHub')
 
 # 라이브러리 설치 ----
-# install.packages("dplyr")
-# install.packages("lubridate")
-# install.packages("stringr")
-# install.packages("data.table")
+install.packages("dplyr")
+install.packages("lubridate")
+install.packages("stringr")
+install.packages("data.table")
 
 library(dplyr)
 library(lubridate)
 library(stringr)
 library(data.table)
 
+a <- starwars
+a
+
+library()
 
 
