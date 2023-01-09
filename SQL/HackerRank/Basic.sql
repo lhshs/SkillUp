@@ -132,3 +132,12 @@ SELECT NAME
 FROM Employee
 WHERE SALARY > 2000 AND MONTHS < 10
 ORDER BY employee_id
+
+
+-- Type Of Triangle
+SELECT CASE WHEN A=B AND B=C THEN 'Equilateral'
+            WHEN A+B <= C OR A+C <= B OR B+C <= A THEN 'Not A Triangle'
+            WHEN A=B OR B=C OR A=C THEN 'Isosceles'
+            ELSE 'Scalene'
+            END
+FROM TRIANGLES
