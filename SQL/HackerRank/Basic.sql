@@ -135,9 +135,37 @@ ORDER BY employee_id
 
 
 -- Type Of Triangle
-SELECT CASE WHEN A=B AND B=C THEN 'Equilateral'
-            WHEN A+B <= C OR A+C <= B OR B+C <= A THEN 'Not A Triangle'
+SELECT CASE WHEN A+B <= C OR A+C <= B OR B+C <= A THEN 'Not A Triangle'
+            WHEN A=B AND B=C THEN 'Equilateral'
             WHEN A=B OR B=C OR A=C THEN 'Isosceles'
             ELSE 'Scalene'
             END
 FROM TRIANGLES
+-- 순서가 중요한 문제였다..
+
+-- The PADS
+SELECT *, 'There are a total of', (SELECT Occupation, COUNT(*)
+                                   FROM OCCUPATIONS
+                                   GROUP BY Occupation)
+FROM OCCUPATIONS
+-- 더 고민해 보기
+
+-- Revising Aggregations - The Count Function
+SELECT COUNT(*)
+FROM CITY
+WHERE POPULATION > 100000
+
+-- Revising Aggregations - The Sum Function
+SELECT SUM(POPULATION)
+FROM CITY
+WHERE DISTRICT='California'
+
+-- Revising Aggregations - Averages
+SELECT AVG(POPULATION)
+FROM CITY
+WHERE DISTRICT = 'California'
+
+-- Average Population
+SELECT FLOOR(AVG(POPULATION))
+FROM CITY
+-- 가장 가까운 정수로 내림 'FLOOR'
