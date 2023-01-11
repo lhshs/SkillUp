@@ -143,12 +143,6 @@ SELECT CASE WHEN A+B <= C OR A+C <= B OR B+C <= A THEN 'Not A Triangle'
 FROM TRIANGLES
 -- 순서가 중요한 문제였다..
 
--- The PADS
-SELECT *, 'There are a total of', (SELECT Occupation, COUNT(*)
-                                   FROM OCCUPATIONS
-                                   GROUP BY Occupation)
-FROM OCCUPATIONS
--- 더 고민해 보기
 
 -- Revising Aggregations - The Count Function
 SELECT COUNT(*)
@@ -169,3 +163,44 @@ WHERE DISTRICT = 'California'
 SELECT FLOOR(AVG(POPULATION))
 FROM CITY
 -- 가장 가까운 정수로 내림 'FLOOR'
+
+-- Revising the Select Query 1
+SELECT *
+FROM CITY
+WHERE POPULATION > 100000 AND COUNTRYCODE = 'USA'
+
+-- Population Density Difference 
+SELECT MAX(POPULATION) - MIN(POPULATION)
+FROM CITY
+
+-- Weather Observation Station 2
+SELECT ROUND(SUM(LAT_N), 2), ROUND(SUM(LONG_W), 2)
+FROM STATION
+
+-- Weather Observation Station 13
+SELECT TRUNCATE(SUM(LAT_N), 4)
+FROM STATION
+WHERE LAT_N > 38.7880 AND LAT_N < 137.2345
+
+-- Weather Observation Station 14
+SELECT TRUNCATE(MAX(LAT_N), 4)
+FROM STATION
+WHERE LAT_N < 137.2345
+
+-- Weather Observation Station 15
+
+-- Weather Observation Station 16
+
+-- Weather Observation Station 17
+
+-- Population Census
+
+-- African Cities
+
+
+-- Average Population of Each Continent
+
+-- Draw the Triangle 1
+
+-- Draw the Triangle 2
+
