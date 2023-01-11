@@ -8,4 +8,5 @@
 2. HackerRank : https://www.hackerrank.com/domains/sql
 
 ## Practice R 😜
-1. https://statools.tistory.com/category/R%20%EC%A3%BC%EC%A0%9C/R%20%EC%BD%94%EB%94%A9%20%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C
+1. [패스트 캠퍼스] 한 번에 끝내는 데이터 분석 초격차 패키지 Online 강의 실습
+2. https://statools.tistory.com/category/R%20%EC%A3%BC%EC%A0%9C/R%20%EC%BD%94%EB%94%A9%20%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C
