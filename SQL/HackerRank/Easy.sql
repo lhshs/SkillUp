@@ -63,6 +63,7 @@ from   station
 order by l asc, c asc
 limit 1;
 
+
 -- Weather Observation Station 5
 SELECT DISTINCT(CITY)
 FROM STATION
@@ -72,7 +73,6 @@ OR CITY LIKE ('I%')
 OR CITY LIKE ('O%')
 OR CITY LIKE ('U%')
 ;
-
 -- --> another solve -- --
 SELECT DISTINCT CITY
 FROM STATION
@@ -98,6 +98,7 @@ SELECT DISTINCT CITY
 FROM STATION
 WHERE CITY REGEXP '^[^AEIOU]'
 
+
 -- Weather Observation Station 10
 SELECT DISTINCT CITY
 FROM STATION
@@ -122,10 +123,12 @@ FROM STUDENTS
 WHERE MARKS > 75
 ORDER BY RIGHT(NAME, 3), ID
 
+
 -- Employee Names
 SELECT NAME
 FROM Employee
 ORDER BY 1
+
 
 -- Employee Salaries
 SELECT NAME
@@ -149,58 +152,115 @@ SELECT COUNT(*)
 FROM CITY
 WHERE POPULATION > 100000
 
+
 -- Revising Aggregations - The Sum Function
 SELECT SUM(POPULATION)
 FROM CITY
 WHERE DISTRICT='California'
+
 
 -- Revising Aggregations - Averages
 SELECT AVG(POPULATION)
 FROM CITY
 WHERE DISTRICT = 'California'
 
+
 -- Average Population
 SELECT FLOOR(AVG(POPULATION))
 FROM CITY
 -- 가장 가까운 정수로 내림 'FLOOR'
+
 
 -- Revising the Select Query 1
 SELECT *
 FROM CITY
 WHERE POPULATION > 100000 AND COUNTRYCODE = 'USA'
 
+
 -- Population Density Difference 
 SELECT MAX(POPULATION) - MIN(POPULATION)
 FROM CITY
 
+
 -- Weather Observation Station 2
 SELECT ROUND(SUM(LAT_N), 2), ROUND(SUM(LONG_W), 2)
 FROM STATION
+
 
 -- Weather Observation Station 13
 SELECT TRUNCATE(SUM(LAT_N), 4)
 FROM STATION
 WHERE LAT_N > 38.7880 AND LAT_N < 137.2345
 
+
 -- Weather Observation Station 14
 SELECT TRUNCATE(MAX(LAT_N), 4)
 FROM STATION
 WHERE LAT_N < 137.2345
 
+
 -- Weather Observation Station 15
+SELECT ROUND(LONG_W, 4)
+FROM STATION
+WHERE LAT_N = (SELECT MAX(LAT_N)
+               FROM STATION
+               WHERE LAT_N < 137.2345)
+
 
 -- Weather Observation Station 16
+SELECT ROUND(MIN(LAT_N), 4)
+FROM STATION
+WHERE LAT_N > 38.7780
+
 
 -- Weather Observation Station 17
+SELECT ROUND(LONG_W, 4)
+FROM STATION
+WHERE LAT_N > 38.7780
+ORDER BY LAT_N
+LIMIT 1
+;
+-- 서브 쿼를 이용한 풀이
+SELECT ROUND(LONG_W, 4)
+FROM STATION
+WHERE LAT_N = (SELECT MIN(LAT_N)
+               FROM STATION
+               WHERE LAT_N > 38.7780)
+;
+
 
 -- Population Census
+SELECT SUM(CI.POPULATION)
+FROM CITY CI
+JOIN COUNTRY CO ON CO.CODE = CI.COUNTRYCODE
+WHERE CONTINENT = 'Asia'
+
 
 -- African Cities
+SELECT CI.NAME
+FROM CITY CI
+JOIN COUNTRY CO ON CO.CODE = CI.COUNTRYCODE
+WHERE CONTINENT = 'Africa'
 
 
 -- Average Population of Each Continent
+SELECT CO.Continent, FLOOR(AVG(CI.Population))
+FROM CITY CI
+JOIN COUNTRY CO ON CO.CODE = CI.COUNTRYCODE
+GROUP BY 1
+-- FLOOR 소수 첫째 자리에서 버림하는 함수
+
 
 -- Draw the Triangle 1
+SET @T = 21;
+SELECT REPEAT("* ", @T := @T-1)
+FROM INFORMATION_SCHEMA.TABLES
+LIMIT 21
+-- SET, REPEAT를 활용
+-- INFORMATION_SCHEMA 인지
 
 -- Draw the Triangle 2
-
+SET @T = 0;
+SELECT REPEAT('* ', @T := @T+1)
+FROM INFORMATION_SCHEMA.TABLES
+LIMIT 20
