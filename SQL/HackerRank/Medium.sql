@@ -27,3 +27,32 @@ JOIN Packages P ON P.ID = SUB.Friend_ID
 WHERE SUB.MY_SALARY < P.Salary
 ORDER BY P.Salary
 -- 다시 풀어보기
+
+-- Binary Tree Nodes
+SELECT N, CASE WHEN P IS NULL THEN 'Root'
+               WHEN N NOT IN (SELECT P FROM BST WHERE P IS NOT NULL) THEN 'Leaf'
+               ELSE 'Inner'
+               END
+FROM BST
+ORDER BY N
+
+-- Weather Obervation Station 18
+SELECT ROUND(ABS(MIN(LAT_N) - MAX(LAT_N)) + ABS(MIN(LONG_W) - MAX(LONG_W)), 4)
+FROM STATION
+
+-- Weather Obervation Station 20
+SELECT ROUND(LAT_N, 4)
+FROM (SELECT LAT_N, PERCENT_RANK() OVER (ORDER BY LAT_N) PERCENT
+      FROM STATION) A
+WHERE PERCENT = 0.5
+-- PERCENT_RANK() 함수에 대한 인지
+
+
+-- Contest Leaderboard
+SELECT H.hacker_id, name, SUM(SUB.TOTAL_SCORE)
+FROM (SELECT hacker_id, MAX(score) AS TOTAL_SCORE FROM Submissions GROUP BY challenge_id, hacker_id) SUB
+JOIN Hackers H ON H.hacker_id = SUB.hacker_id
+GROUP BY 1, 2
+HAVING SUM(SUB.TOTAL_SCORE) <> 0
+ORDER BY 3 DESC, 1
+-- subquery의 생각이 쉽지 않다
