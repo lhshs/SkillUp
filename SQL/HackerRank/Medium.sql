@@ -26,7 +26,7 @@ FROM(SELECT S.ID, S.NAME, F.Friend_ID, P.Salary AS MY_SALARY
 JOIN Packages P ON P.ID = SUB.Friend_ID
 WHERE SUB.MY_SALARY < P.Salary
 ORDER BY P.Salary
--- 다시 풀어보기
+
 
 -- Binary Tree Nodes
 SELECT N, CASE WHEN P IS NULL THEN 'Root'
@@ -56,3 +56,24 @@ GROUP BY 1, 2
 HAVING SUM(SUB.TOTAL_SCORE) <> 0
 ORDER BY 3 DESC, 1
 -- subquery의 생각이 쉽지 않다
+-- 나의 풀이 230114
+SELECT hacker_id, name, SUM(score)
+FROM (SELECT H.hacker_id, challenge_id, name, MAX(score) AS score
+      FROM Hackers H
+      JOIN Submissions S ON S.hacker_id = H.hacker_id
+      GROUP BY 1, 2, 3) AS SUB
+GROUP BY 1, 2
+HAVING SUM(score) <> 0
+ORDER BY 3 DESC, 1
+
+-- New Companies
+SELECT C.company_code, founder, COUNT(DISTINCT(LM.lead_manager_code)), 
+       COUNT(DISTINCT(SM.senior_manager_code)),COUNT(DISTINCT(M.manager_code)), 
+       COUNT(DISTINCT(E.employee_code))
+FROM Company C
+JOIN Lead_Manager LM ON LM.company_code = C.company_code
+JOIN Senior_Manager SM ON SM.company_code = C.company_code
+JOIN Manager M ON M.company_code = C.company_code
+JOIN Employee E ON E.company_code = C.company_code
+GROUP BY 1, 2
+
