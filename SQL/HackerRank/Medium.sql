@@ -89,4 +89,14 @@ ORDER BY 2 DESC, 1, 3
 -- BETWEEN A AND B
 
 -- Symmetric Pairs
+SELECT H.hacker_id, name
+FROM Hackers H
+      JOIN Submissions S ON S.hacker_id = H.hacker_id
+      JOIN Challenges C ON C.challenge_id = S.challenge_id
+      JOIN Difficulty D ON D.difficulty_level = C.difficulty_level
+WHERE S.score = D.score 
+GROUP BY 1, 2
+HAVING COUNT(H.hacker_id) > 1
+ORDER BY COUNT(H.hacker_id) DESC, 1
+
 
