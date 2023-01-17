@@ -77,3 +77,16 @@ JOIN Manager M ON M.company_code = C.company_code
 JOIN Employee E ON E.company_code = C.company_code
 GROUP BY 1, 2
 
+-- The Report
+SELECT CASE WHEN Grade < 8 THEN NULL
+            ELSE Name
+            END
+     , Grade
+     , Marks
+FROM Students S
+JOIN Grades G ON S.Marks BETWEEN Min_Mark AND Max_Mark
+ORDER BY 2 DESC, 1, 3
+-- BETWEEN A AND B
+
+-- Symmetric Pairs
+
