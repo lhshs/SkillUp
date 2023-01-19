@@ -67,15 +67,18 @@ HAVING SUM(score) <> 0
 ORDER BY 3 DESC, 1
 
 -- New Companies
-SELECT C.company_code, founder, COUNT(DISTINCT(LM.lead_manager_code)), 
-       COUNT(DISTINCT(SM.senior_manager_code)),COUNT(DISTINCT(M.manager_code)), 
+SELECT Com.company_code, founder, 
+       COUNT(DISTINCT(LM.lead_manager_code)), 
+       COUNT(DISTINCT(SM.senior_manager_code)), 
+       COUNT(DISTINCT(M.manager_code)), 
        COUNT(DISTINCT(E.employee_code))
-FROM Company C
-JOIN Lead_Manager LM ON LM.company_code = C.company_code
-JOIN Senior_Manager SM ON SM.company_code = C.company_code
-JOIN Manager M ON M.company_code = C.company_code
-JOIN Employee E ON E.company_code = C.company_code
+FROM Company Com
+JOIN Lead_Manager LM ON LM.company_code = Com.company_code
+JOIN Senior_Manager SM ON SM.company_code = Com.company_code
+JOIN Manager M ON M.company_code = Com.company_code
+JOIN Employee E ON E.company_code = Com.company_code
 GROUP BY 1, 2
+ORDER BY 1
 
 -- The Report
 SELECT CASE WHEN Grade < 8 THEN NULL
@@ -99,4 +102,13 @@ GROUP BY 1, 2
 HAVING COUNT(H.hacker_id) > 1
 ORDER BY COUNT(H.hacker_id) DESC, 1
 
-
+-- Top Competitors
+SELECT S.hacker_id, name
+FROM Submissions S
+     JOIN Hackers H ON H.hacker_id = S.hacker_id
+     JOIN Challenges C ON C.challenge_id = S.challenge_id
+     JOIN Difficulty D ON D.difficulty_level = C.difficulty_level
+WHERE D.score = S.score
+GROUP BY 1, 2
+HAVING COUNT(name) > 1
+ORDER BY COUNT(name) DESC, 1
