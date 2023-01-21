@@ -91,16 +91,14 @@ JOIN Grades G ON S.Marks BETWEEN Min_Mark AND Max_Mark
 ORDER BY 2 DESC, 1, 3
 -- BETWEEN A AND B
 
--- Symmetric Pairs
-SELECT H.hacker_id, name
-FROM Hackers H
-      JOIN Submissions S ON S.hacker_id = H.hacker_id
-      JOIN Challenges C ON C.challenge_id = S.challenge_id
-      JOIN Difficulty D ON D.difficulty_level = C.difficulty_level
-WHERE S.score = D.score 
+-- Symmetric Pairs----
+SELECT F1.X, F1.Y
+FROM Functions F1
+JOIN Functions F2 ON F1.X = F2.Y AND F2.X = F1.Y
 GROUP BY 1, 2
-HAVING COUNT(H.hacker_id) > 1
-ORDER BY COUNT(H.hacker_id) DESC, 1
+HAVING COUNT(*) >= 2 OR F1.X < F1.Y
+ORDER BY 1
+
 
 -- Top Competitors
 SELECT S.hacker_id, name
@@ -112,3 +110,16 @@ WHERE D.score = S.score
 GROUP BY 1, 2
 HAVING COUNT(name) > 1
 ORDER BY COUNT(name) DESC, 1
+--
+SELECT H.hacker_id, name
+FROM Hackers H
+      JOIN Submissions S ON S.hacker_id = H.hacker_id
+      JOIN Challenges C ON C.challenge_id = S.challenge_id
+      JOIN Difficulty D ON D.difficulty_level = C.difficulty_level
+WHERE S.score = D.score 
+GROUP BY 1, 2
+HAVING COUNT(H.hacker_id) > 1
+ORDER BY COUNT(H.hacker_id) DESC, 1
+
+
+
